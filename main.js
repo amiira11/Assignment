@@ -44,7 +44,7 @@ async function getdata(url) {
           } else if (target === "examples") {
             deatails.innerHTML = "";
             const examplesData = result.examples.join("<br>");
-            // let examplesdata = element
+          
 
             deatails.innerHTML += ` <p class="examples">
         <span>examples</span> <br />
@@ -58,8 +58,7 @@ async function getdata(url) {
           } else if (target === "synonyms") {
             deatails.innerHTML = "";
             const synonymsData = result.synonyms.join(",");
-            // let examplesdata = element
-
+         
             deatails.innerHTML += `  <p class="synoms">
         <span>synoms</span><br />
       ${synonymsData}
@@ -72,7 +71,7 @@ async function getdata(url) {
           } else if (target === "antonyms") {
             deatails.innerHTML = "";
             const antonymsData = result.antonyms.join(",");
-            // let examplesdata = element
+            
 
             deatails.innerHTML += `  <p class="antnoms">
         <span>antynoms</span><br />
