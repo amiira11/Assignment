@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>second page</title>
+    <style>
+      body{
+        background-color: pink;
+      }
+          .container{
+    padding: 1% 25%;}
+    span{
+    font-weight: bold;
+    font-size: 20px;
+ 
+}
+.examples ,.Definition,.antnoms,.synoms {
+    margin-bottom: 17px;
+}
+
+.Definition span ,p{
+    font-size: 20px;
+}
+.Definition p span{
+    font-size: 20px;
+}
+
+
+.check{
+   width: 20px;
+   height: 20px;
+
+   margin-left: 10px;
+ }
+ .check input{
+    width: 100%;
+    height: 100%;
+ }
+
+ .chechlist{
+    display: flex;
+    align-items: center;
+ }
+
+ ::placeholder{
+    font-size: 18px;
+ }
+ .initial{
+    text-align: center;
+ }
+ .theword{
+    font-size: 25px;
+    font-weight: 600;
+    padding: 0 0 10px 0;
+    margin-left: -25px;
+    color:blue ;
+    font-weight: bold;
+ }
+ .initial p{
+  font-weight: bold;
+  font-size: 30px;
+ }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="initial"><p>List Words That We Have Learned</p></div>
+        <div class="deatails"></div>
+    </div>
+
+    <script>
+const deatails = document.querySelector(".deatails");
+const itemsPerPage = 5;
+let currentPage = 1;
+
+const arraywords = JSON.parse(localStorage.getItem("arraylist"));
+
+const displayData = () => {
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  const itemsToDisplay = arraywords.slice(startIndex, endIndex);
+
+  itemsToDisplay.forEach(item => {
+    const antonymsData = item.antonyms.join(",");
+    const synonymsData = item.synonyms.join(",");
+    const examplesData = item.examples.join("<br>");
+
+    const itemHTML = `<p class="Definition">
+      <div class="theword">  ${item.word}:</div>
+      <span>Definition</span>: <br />
+      ${item.definition}.
+    </p>
+
+    <p class="examples">
+      <span>examples</span> <br />
+      ${examplesData}
+    </p>
+    <p class="synoms">
+      <span>synoms</span><br />
+      ${synonymsData}
+    </p>
+    <p class="antnoms">
+      <span>antynoms</span><br />
+      ${antonymsData}
+    </p>`;
+
+    deatails.insertAdjacentHTML('beforeend', itemHTML);
+  });
+
+  currentPage++;
+};
+
+displayData();
+
+window.addEventListener("scroll", () => {
+  const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
+  if (scrollTop + clientHeight >= scrollHeight) {
+    displayData();
+  }
+});
+
+    </script>
+</body>
+</html>
